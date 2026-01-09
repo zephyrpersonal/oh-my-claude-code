@@ -1,0 +1,23 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "oh-my-claude-code-plugins",
+  "version": "1.0.0",
+  "description": "Multi-agent orchestration with Ultrawork mode (Sisyphus Mode) for obsessive task completion",
+  "owner": {
+    "name": "oh-my-claude-code contributors",
+    "email": "contributors@example.com"
+  },
+  "plugins": [
+    {
+      "name": "oh-my-claude-code",
+      "description": "Multi-agent orchestration with Ultrawork mode for Claude Code",
+      "version": "1.1.0",
+      "author": {
+        "name": "oh-my-claude-code contributors",
+        "email": "contributors@example.com"
+      },
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}

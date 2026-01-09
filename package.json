@@ -1,0 +1,16 @@
+{
+  "name": "oh-my-claude-code",
+  "version": "1.1.0",
+  "description": "Multi-agent orchestration with Ultrawork mode for Claude Code",
+  "keywords": ["claude-code", "plugin", "agents", "ultrawork", "sisyphus"],
+  "author": "oh-my-claude-code contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/user/oh-my-claude-code"
+  },
+  "claude-code-plugin": true,
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

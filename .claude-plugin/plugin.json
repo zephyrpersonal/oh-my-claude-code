@@ -1,0 +1,19 @@
+{
+  "name": "oh-my-claude-code",
+  "version": "1.1.0",
+  "description": "Multi-agent orchestration with Ultrawork mode (Sisyphus Mode) for obsessive task completion",
+  "author": {
+    "name": "oh-my-claude-code contributors",
+    "url": "https://github.com/user/oh-my-claude-code"
+  },
+  "repository": "https://github.com/user/oh-my-claude-code",
+  "license": "MIT",
+  "keywords": [
+    "agents",
+    "orchestration", 
+    "ultrawork",
+    "sisyphus",
+    "multi-agent",
+    "productivity"
+  ]
+}
