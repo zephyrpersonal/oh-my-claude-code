@@ -23,7 +23,7 @@ oh-my-claude-code 为 Claude Code 带来多智能体编排能力：
 
 ```bash
 # 添加 marketplace
-/plugin marketplace add https://github.com/user/oh-my-claude-code
+/plugin marketplace add https://github.com/zephyrpersonal/oh-my-claude-code
 
 # 安装插件
 /plugin install oh-my-claude-code@oh-my-claude-code-plugins
@@ -34,7 +34,7 @@ oh-my-claude-code 为 Claude Code 带来多智能体编排能力：
 1. 克隆仓库：
 
 ```bash
-git clone https://github.com/user/oh-my-claude-code.git
+git clone https://github.com/zephyrpersonal/oh-my-claude-code.git
 ```
 
 2. 添加本地 marketplace 并安装：

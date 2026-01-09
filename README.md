@@ -23,7 +23,7 @@ oh-my-claude-code brings the power of multi-agent orchestration to Claude Code. 
 
 ```bash
 # Add the marketplace
-/plugin marketplace add https://github.com/user/oh-my-claude-code
+/plugin marketplace add https://github.com/zephyrpersonal/oh-my-claude-code
 
 # Install the plugin
 /plugin install oh-my-claude-code@oh-my-claude-code-plugins
@@ -34,7 +34,7 @@ oh-my-claude-code brings the power of multi-agent orchestration to Claude Code. 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/user/oh-my-claude-code.git
+git clone https://github.com/zephyrpersonal/oh-my-claude-code.git
 ```
 
 2. Add local marketplace and install:

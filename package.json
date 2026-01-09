@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/user/oh-my-claude-code"
+    "url": "https://github.com/zephyrpersonal/oh-my-claude-code"
   },
   "claude-code-plugin": true,
   "engines": {
