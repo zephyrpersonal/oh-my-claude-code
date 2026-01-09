@@ -19,32 +19,29 @@ oh-my-claude-code brings the power of multi-agent orchestration to Claude Code. 
 
 ## Installation
 
-### Local Installation (Recommended for Development)
+### From Marketplace (Recommended)
 
-1. Clone or download this repository:
+```bash
+# Add the marketplace
+/plugin marketplace add https://github.com/user/oh-my-claude-code
+
+# Install the plugin
+/plugin install oh-my-claude-code@oh-my-claude-code-plugins
+```
+
+### Local Installation (For Development)
+
+1. Clone the repository:
 
 ```bash
 git clone https://github.com/user/oh-my-claude-code.git
-cd oh-my-claude-code
 ```
 
-2. Add the local marketplace:
+2. Add local marketplace and install:
 
 ```bash
 /plugin marketplace add ./oh-my-claude-code
-```
-
-3. Install the plugin:
-
-```bash
-/plugin install oh-my-claude-code@oh-my-claude-code-marketplace
-```
-
-### From GitHub (Coming Soon)
-
-```bash
-# When published to a marketplace
-claude plugin install oh-my-claude-code@official-marketplace --scope user
+/plugin install oh-my-claude-code@oh-my-claude-code-plugins
 ```
 
 ## Plugin Structure

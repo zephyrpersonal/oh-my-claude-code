@@ -19,24 +19,28 @@ oh-my-claude-code 为 Claude Code 带来多智能体编排能力：
 
 ## 安装
 
-### 本地安装（推荐用于开发）
+### 从 Marketplace 安装（推荐）
 
-1. 克隆或下载本仓库：
+```bash
+# 添加 marketplace
+/plugin marketplace add https://github.com/user/oh-my-claude-code
+
+# 安装插件
+/plugin install oh-my-claude-code@oh-my-claude-code-plugins
+```
+
+### 本地安装（用于开发）
+
+1. 克隆仓库：
 
 ```bash
 git clone https://github.com/user/oh-my-claude-code.git
-cd oh-my-claude-code
 ```
 
-2. 添加本地 marketplace：
+2. 添加本地 marketplace 并安装：
 
 ```bash
 /plugin marketplace add ./oh-my-claude-code
-```
-
-3. 安装插件：
-
-```bash
 /plugin install oh-my-claude-code@oh-my-claude-code-plugins
 ```
 
