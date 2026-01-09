@@ -3,7 +3,7 @@ name: explore
 description: |
   Contextual grep for codebases. Answers "Where is X?", "Which file has Y?",
   "Find the code that does Z". Specify thoroughness: quick, medium, or very thorough.
-model: anthropic/claude-haiku-4-5
+model: haiku
 
 # oh-my-claude-code metadata
 x-omo-category: exploration

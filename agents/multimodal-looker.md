@@ -3,7 +3,7 @@ name: multimodal-looker
 description: |
   Visual analysis specialist for PDFs, images, screenshots, and diagrams.
   Extracts and interprets information from visual media.
-model: anthropic/claude-sonnet-4-5
+model: sonnet
 
 # oh-my-claude-code metadata
 x-omo-category: specialist

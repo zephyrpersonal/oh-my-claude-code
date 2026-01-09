@@ -3,7 +3,7 @@ name: frontend-ui-ux-engineer
 description: |
   Expert in frontend UI/UX for visual changes. Use for styling, layout,
   animation, responsive design, and visual polish. NOT for logic/state changes.
-model: anthropic/claude-sonnet-4-5
+model: sonnet
 
 # oh-my-claude-code metadata
 x-omo-category: specialist

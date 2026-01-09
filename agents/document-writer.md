@@ -3,7 +3,7 @@ name: document-writer
 description: |
   Technical writing specialist for creating clear, accurate documentation.
   Use for README, API docs, architecture docs, and code comments.
-model: anthropic/claude-sonnet-4-5
+model: sonnet
 
 # oh-my-claude-code metadata
 x-omo-category: specialist

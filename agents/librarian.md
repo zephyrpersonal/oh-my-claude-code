@@ -3,7 +3,7 @@ name: librarian
 description: |
   Specialized in external documentation, open-source codebases, and finding
   implementation examples. Use when working with unfamiliar libraries.
-model: anthropic/claude-sonnet-4-5
+model: sonnet
 
 # oh-my-claude-code metadata
 x-omo-category: exploration

@@ -3,7 +3,7 @@ name: oracle
 description: |
   Expert technical advisor with deep reasoning for architecture decisions,
   code analysis, and engineering guidance. Use sparingly for complex problems.
-model: anthropic/claude-opus-4-5
+model: opus
 
 # oh-my-claude-code metadata
 x-omo-category: advisor
