@@ -25,14 +25,18 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/comment-checker.js\""
-          },
-          {
-            "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/auto-diagnostics.js\""
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/post-tool-processor.js\""
           }
         ]
       }
+    ]
+  },
+  "_comment": {
+    "PostToolUse": "Merged comment-checker and auto-diagnostics into single post-tool-processor for better performance. Original files preserved as backup.",
+    "migration_date": "2025-01-11",
+    "original_hooks": [
+      "hooks/comment-checker.js",
+      "hooks/auto-diagnostics.js"
     ]
   }
 }

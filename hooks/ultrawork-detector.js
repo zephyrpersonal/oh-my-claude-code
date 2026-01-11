@@ -1,76 +1,39 @@
 #!/usr/bin/env node
 /**
  * Ultrawork Keyword Detector Hook
- * 
- * Detects 'ulw', 'ultrawork', or 'uw' keywords in user prompts
- * and injects ultrawork mode instructions with optional parameters.
- * 
- * Supported parameters:
- *   --max-iterations N     Maximum continuation attempts (default: 50)
- *   --thoroughness LEVEL   Search depth: quick|medium|thorough (default: thorough)
- *   --no-diagnostics       Disable auto-diagnostics reminders
- *   --completion-signal S  Custom completion signal phrase
- * 
- * Examples:
+ *
+ * 检测 'ulw', 'ultrawork', 或 'uw' 关键词在用户提示词中
+ * 并注入 ultrawork 模式指令和可选参数。
+ *
+ * 支持的参数:
+ *   --max-iterations N     最大继续尝试次数 (默认: 50)
+ *   --thoroughness LEVEL   搜索深度: quick|medium|thorough (默认: thorough)
+ *   --no-diagnostics       禁用自动诊断提醒
+ *   --completion-signal S  自定义完成信号短语
+ *
+ * 示例:
  *   "implement auth, ulw --max-iterations 20"
  *   "ulw --thoroughness medium refactor the cache layer"
  *   "add tests ulw --completion-signal 'all tests pass'"
- * 
+ *
  * Hook Type: UserPromptSubmit
  * Output: JSON with additionalContext
  */
 
-const ULTRAWORK_KEYWORDS = ['ulw', 'ultrawork', 'uw'];
-const ULTRAWORK_PATTERN = new RegExp(
-  `\\b(${ULTRAWORK_KEYWORDS.join('|')})\\b`,
-  'i'
-);
+const config = require('../config/index');
+const { parseAndValidateParams, generateValidationErrorHint } = require('../utils/validation');
+const patterns = require('../utils/patterns');
 
-// Parameter patterns
-const PARAM_PATTERNS = {
-  maxIterations: /--max-iterations\s+(\d+)/i,
-  thoroughness: /--thoroughness\s+(quick|medium|thorough)/i,
-  noDiagnostics: /--no-diagnostics/i,
-  completionSignal: /--completion-signal\s+["']([^"']+)["']/i,
-};
-
-function parseParams(prompt) {
-  const params = {
-    maxIterations: 50,
-    thoroughness: 'thorough',
-    diagnostics: true,
-    completionSignal: null,
-  };
-  
-  const maxMatch = prompt.match(PARAM_PATTERNS.maxIterations);
-  if (maxMatch) {
-    params.maxIterations = parseInt(maxMatch[1], 10);
-  }
-  
-  const thoroMatch = prompt.match(PARAM_PATTERNS.thoroughness);
-  if (thoroMatch) {
-    params.thoroughness = thoroMatch[1].toLowerCase();
-  }
-  
-  if (PARAM_PATTERNS.noDiagnostics.test(prompt)) {
-    params.diagnostics = false;
-  }
-  
-  const signalMatch = prompt.match(PARAM_PATTERNS.completionSignal);
-  if (signalMatch) {
-    params.completionSignal = signalMatch[1];
-  }
-  
-  return params;
-}
-
+/**
+ * 构建上下文消息
+ */
 function buildContext(params) {
   const thoroughnessMap = {
     quick: 'Use quick searches for speed',
-    medium: 'Use medium thoroughness for balanced searches', 
-    thorough: "Use 'very thorough' for all searches"
+    medium: 'Use medium thoroughness for balanced searches',
+    thorough: "Use 'very thorough' for all searches",
   };
-  
+
   let context = `
 [ULTRAWORK MODE ACTIVE]
 
@@ -94,49 +57,96 @@ If you stop with incomplete tasks, you will be automatically prompted to continu
 
 Remember: Like Sisyphus, you roll the boulder until you reach the top.
 `;
-  
+
   return context;
 }
 
-let input = '';
+/**
+ * 主处理函数
+ */
+function processPrompt(prompt) {
+  // 检测 ultrawork 关键词
+  if (!patterns.ULTRAWORK_PATTERN.test(prompt)) {
+    return null;
+  }
 
-process.stdin.setEncoding('utf8');
-process.stdin.on('data', (chunk) => {
-  input += chunk;
-});
+  // 解析并验证参数
+  const { params, validationResult } = parseAndValidateParams(prompt);
 
-process.stdin.on('end', () => {
+  // 如果验证失败，返回错误提示
+  if (!validationResult.valid) {
+    return {
+      hookSpecificOutput: {
+        hookEventName: 'UserPromptSubmit',
+        additionalContext: generateValidationErrorHint(validationResult),
+      },
+    };
+  }
+
+  // 构建上下文
+  const context = buildContext(params);
+
+  return {
+    hookSpecificOutput: {
+      hookEventName: 'UserPromptSubmit',
+      additionalContext: context,
+      // 传递参数给其他 hooks
+      ultraworkParams: params,
+    },
+  };
+}
+
+/**
+ * 从 stdin 读取输入
+ */
+function readStdin() {
+  return new Promise((resolve, reject) => {
+    let input = '';
+
+    process.stdin.setEncoding('utf8');
+    process.stdin.on('data', (chunk) => {
+      input += chunk;
+    });
+
+    process.stdin.on('end', () => {
+      resolve(input);
+    });
+
+    process.stdin.on('error', reject);
+  });
+}
+
+/**
+ * 主入口
+ */
+async function main() {
   try {
-    const data = JSON.parse(input);
-    const prompt = data.prompt || '';
-    
-    if (ULTRAWORK_PATTERN.test(prompt)) {
-      const params = parseParams(prompt);
-      const context = buildContext(params);
-      
-      const output = {
-        hookSpecificOutput: {
-          hookEventName: 'UserPromptSubmit',
-          additionalContext: context,
-          // Pass params for other hooks to read
-          ultraworkParams: params
-        }
-      };
-      
-      console.log(JSON.stringify(output));
+    const input = await readStdin();
+
+    if (!input) {
       process.exit(0);
     }
-    
+
+    const data = JSON.parse(input);
+    const prompt = data.prompt || '';
+
+    const result = processPrompt(prompt);
+
+    if (result) {
+      console.log(JSON.stringify(result));
+    }
+
     process.exit(0);
-    
   } catch (error) {
     console.error(`Hook error: ${error.message}`);
     process.exit(1);
   }
+}
+
+// 处理空 stdin
+process.stdin.on('close', () => {
+  // 由 readStdin Promise 处理
 });
 
-process.stdin.on('close', () => {
-  if (!input) {
-    process.exit(0);
-  }
-});
+// 运行
+main();
