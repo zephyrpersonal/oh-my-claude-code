@@ -25,6 +25,22 @@ const { parseAndValidateParams, generateValidationErrorHint } = require('../util
 const patterns = require('../utils/patterns');
 
 /**
+ * 构建用户可见通知
+ */
+function buildUserNotification(params) {
+  return `
+**🚀 ULTRAWORK MODE ACTIVATED**
+
+Configuration:
+• Max iterations: ${params.maxIterations}
+• Thoroughness: ${params.thoroughness}
+• Auto-diagnostics: ${params.diagnostics ? 'ON' : 'OFF'}
+
+You are now in high-intensity work mode. Tasks will be executed persistently until completion.
+`;
+}
+
+/**
  * 构建上下文消息
  */
 function buildContext(params) {
@@ -36,6 +52,19 @@ function buildContext(params) {
 
   let context = `
 [ULTRAWORK MODE ACTIVE]
+
+IMPORTANT: You MUST inform the user that ULTRAWORK mode has been activated. Display this message to the user before proceeding:
+
+**🚀 ULTRAWORK MODE ACTIVATED**
+
+Configuration:
+• Max iterations: ${params.maxIterations}
+• Thoroughness: ${params.thoroughness}
+• Auto-diagnostics: ${params.diagnostics ? 'ON' : 'OFF'}
+
+You are now in high-intensity work mode. Tasks will be executed persistently until completion.
+
+---
 
 Configuration:
 - Max iterations: ${params.maxIterations}

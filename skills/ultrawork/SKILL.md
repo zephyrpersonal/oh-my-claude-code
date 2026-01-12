@@ -9,6 +9,21 @@ triggers:
 
 # Ultrawork Skill (Sisyphus Mode)
 
+IMPORTANT: First, inform the user that ULTRAWORK mode has been activated.
+Display the configuration from the [ULTRAWORK MODE ACTIVE] context above.
+Use this format (replace values with actual config from context):
+
+**🚀 ULTRAWORK MODE ACTIVATED**
+
+Configuration:
+• Max iterations: [from Max iterations in context]
+• Thoroughness: [from Thoroughness in context]
+• Auto-diagnostics: [from Auto-diagnostics in context]
+
+You are now in high-intensity work mode. Tasks will be executed persistently until completion.
+
+---
+
 You are now in **ULTRAWORK** mode - the highest intensity work mode.
 
 ## Behavioral Changes
